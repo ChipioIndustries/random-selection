@@ -1,0 +1,45 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.3.4
+
+      - uses: ok-nick/setup-aftman@v0.1.0
+        name: Install Aftman
+        with:
+            token: ${{ SECRETS.GITHUB_TOKEN }}
+            version: "v0.2.6"
+            trust-check: false
+
+      - name: Add Wally Auth
+        shell: bash
+        env:
+          WALLY_AUTH: ${{secrets.WALLY_AUTH}}
+        run: |
+          mkdir -p ~/.wally
+          echo "$WALLY_AUTH" > ~/.wally/auth.toml
+          wally publish
+
+      - name: Get version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+
+      - name: Changelog
+        run: python3 getLatestChangelog.py CHANGELOG.md > log.md
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ steps.get_version.outputs.VERSION }}
+          body_path: log.md
+          fail_on_unmatched_files: true
+          files: |

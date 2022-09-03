@@ -1,0 +1,20 @@
+{
+	"name": "random-selection",
+	"tree": {
+		"$className": "DataModel",
+
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"DevPackages": {
+				"$path": "../DevPackages"
+			},
+			"Packages": {
+				"$className": "Folder",
+				"$path": "../Packages",
+				"RandomSelection": {
+					"$path": "../default.project.json"
+				}
+			}
+		}
+	}
+}

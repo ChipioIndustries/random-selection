@@ -1,0 +1,21 @@
+name: Lint
+
+on:
+  push:
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2.3.4
+    - uses: ok-nick/setup-aftman@v0.1.0
+      name: Install Aftman
+      with:
+          token: ${{ SECRETS.GITHUB_TOKEN }}
+          version: "v0.2.6"
+          trust-check: false
+    - name: Lint
+      run: |
+        selene ./src
