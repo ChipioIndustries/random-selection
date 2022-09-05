@@ -8,6 +8,7 @@ exclude = ["wally.exe"]
 
 [dependencies]
 t = "osyrisrblx/t@3.0.0"
+Llama = "chipioindustries/llama@1.2.4"
 
 [dev-dependencies]
 TestEZ = "roblox/testez@0.4.1"
