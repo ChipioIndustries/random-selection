@@ -1,7 +1,7 @@
 [package]
 name = "chipioindustries/random-selection"
 description = "A module for selecting a random item from a weighted list."
-version = "1.0.0"
+version = "1.0.1"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 exclude = ["wally.exe", "aftman", "*.zip"]
